@@ -385,15 +385,11 @@ public class PizzaOrder extends javax.swing.JFrame {
         int valasz = JOptionPane.showConfirmDialog(rootPane, format, Cim, JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
         if (valasz == JOptionPane.YES_OPTION) {
-           
+            JOptionPane.showMessageDialog(null, "Köszönjük,hogy nálunk rendelt!");
             System.exit(0);
         }
         if (valasz == JOptionPane.NO_OPTION) {
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    new PizzaOrder().setVisible(true);
-                }
-            });
+            System.exit(0);
         }
         return valasz;
     }
