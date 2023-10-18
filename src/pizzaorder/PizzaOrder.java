@@ -6,8 +6,6 @@ package pizzaorder;
 
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
-import javax.swing.ButtonModel;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -382,10 +380,11 @@ public class PizzaOrder extends javax.swing.JFrame {
         String cim = CimTF.getText();
         String feltet = feltetek();
         String alap = (String) PizzaAlapcob.getSelectedItem();
+        String alaptrimmelt = alap.trim();
         String meret = meret();
         int db = (int) DbSpin.getValue();
-        int osszeg = szamulas();
-        String format = String.format("%s\nRendelő neve: %s\nTelefon Szám: %s\nKiszálítási cím: %s\nFeltétek a pizzára: %s\nKiválasztot Méret: %s\nRendelt alap: %s\nRendelt mennyiség: %d\nVégösszeg: %d", RendInf, nev, telefon, cim, feltet, meret, alap, db, osszeg);
+        int osszeg = szamolas();
+        String format = String.format("%s\nRendelő neve: %s\nTelefon Szám: %s\nKiszálítási cím: %s\nFeltétek a pizzára: %s\nKiválasztot Méret: %s\nRendelt alap: %s\nRendelt mennyiség: %d\nVégösszeg: %d FT", RendInf, nev, telefon, cim, feltet, meret, alaptrimmelt, db, osszeg);
         int valasz = JOptionPane.showConfirmDialog(rootPane, format, Cim, JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
         if (valasz == JOptionPane.YES_OPTION) {
@@ -423,21 +422,37 @@ public class PizzaOrder extends javax.swing.JFrame {
 
     }
 
-    private int szamulas() {
+    private int szamolas() {
+        Boolean[] feltetek = {SonkaCkb.isSelected(), PaprikaCkb.isSelected(), Sajtckb.isSelected(), Kukoricackb.isSelected(), Szalamickb.isSelected()};
         int osszeg = 0;
         int meret = 0;
-        int db = (int) DbSpin.getValue();
-        if (meret().equals("32 Cm")) {
-            meret = 32;
-        } else if (meret().equals("50 Cm")) {
-            meret = 50;
-        } else if (meret().equals("60 Cm")) {
-            meret = 60;
-        }
+        boolean pizzaAlap1 = PizzaAlapcob.getSelectedIndex() == 1;
+        boolean pizzaAlap2 = PizzaAlapcob.getSelectedIndex() == 2;
         int[] feltetekArak = {250, 300, 350, 400, 500};
         int[] meretArak = {1150, 2145, 2650};
         int[] alapArak = {1300, 1500};
-        osszeg += meret;
+        int db = (int) DbSpin.getValue();
+        if (meret().equals("32 Cm")) {
+            meret = 0;
+            osszeg += meretArak[meret];
+        } else if (meret().equals("50 Cm")) {
+            meret = 1;
+            osszeg += meretArak[meret];
+        } else if (meret().equals("60 Cm")) {
+            meret = 2;
+            osszeg += meretArak[meret];
+        }
+        if (pizzaAlap1) {
+            osszeg += alapArak[0];
+        }
+        else if(pizzaAlap2){
+            osszeg += alapArak[1];
+        }
+        for (int i = 0; i < feltetek.length; i++) {
+            if (feltetek[i]) {
+                osszeg += feltetekArak[i];
+            }
+        }
 
         osszeg = osszeg * db;
         return osszeg;
