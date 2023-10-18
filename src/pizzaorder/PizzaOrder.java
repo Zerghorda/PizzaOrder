@@ -299,7 +299,7 @@ public class PizzaOrder extends javax.swing.JFrame {
         int ikon = 0;
         String uzenet = "";
         String cim = "";
-        JOptionPane.showMessageDialog(null, "Teszt", "Teszt", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Teszt", "Teszt", JOptionPane.WARNING_MESSAGE);
         if (vanAlap & vanfizetesM & !NincsNev & !NincsTszam & !NincsCim) {
             informaciok();
         } else if (!vanfizetesM) {
