@@ -1,2 +1,2 @@
 ## PizzaOrder
-# GitHub-on létrehozva: ** Tar Gergő **
+# GitHub-on létrehozva: * * Tar Gergő * *
