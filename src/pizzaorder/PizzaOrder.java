@@ -6,6 +6,8 @@ package pizzaorder;
 
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
+import javax.swing.ButtonModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -379,9 +381,11 @@ public class PizzaOrder extends javax.swing.JFrame {
         String telefon = telefonTF.getText();
         String cim = CimTF.getText();
         String feltet = feltetek();
+        String alap = (String) PizzaAlapcob.getSelectedItem();
         String meret = meret();
         int db = (int) DbSpin.getValue();
-        String format = String.format("%s\nRendelő neve: %s\nTelefon Szám: %s\nKiszálítási cím: %s\nFeltétek a pizzára: %s\nKiválasztot Méret: %s\nRendelt mennyiség: %d", RendInf, nev, telefon, cim, feltet, meret, db);
+        int osszeg = szamulas();
+        String format = String.format("%s\nRendelő neve: %s\nTelefon Szám: %s\nKiszálítási cím: %s\nFeltétek a pizzára: %s\nKiválasztot Méret: %s\nRendelt alap: %s\nRendelt mennyiség: %d\nVégösszeg: %d", RendInf, nev, telefon, cim, feltet, meret, alap, db, osszeg);
         int valasz = JOptionPane.showConfirmDialog(rootPane, format, Cim, JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
         if (valasz == JOptionPane.YES_OPTION) {
@@ -416,6 +420,27 @@ public class PizzaOrder extends javax.swing.JFrame {
         }
 
         return txt;
+
+    }
+
+    private int szamulas() {
+        int osszeg = 0;
+        int meret = 0;
+        int db = (int) DbSpin.getValue();
+        if (meret().equals("32 Cm")) {
+            meret = 32;
+        } else if (meret().equals("50 Cm")) {
+            meret = 50;
+        } else if (meret().equals("60 Cm")) {
+            meret = 60;
+        }
+        int[] feltetekArak = {250, 300, 350, 400, 500};
+        int[] meretArak = {1150, 2145, 2650};
+        int[] alapArak = {1300, 1500};
+        osszeg += meret;
+
+        osszeg = osszeg * db;
+        return osszeg;
 
     }
 
