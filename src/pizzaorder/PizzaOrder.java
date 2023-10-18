@@ -299,7 +299,6 @@ public class PizzaOrder extends javax.swing.JFrame {
         int ikon = 0;
         String uzenet = "";
         String cim = "";
-        JOptionPane.showMessageDialog(null, "Teszt", "Teszt", JOptionPane.WARNING_MESSAGE);
         if (vanAlap & vanfizetesM & !NincsNev & !NincsTszam & !NincsCim) {
             informaciok();
         } else if (!vanfizetesM) {
@@ -386,6 +385,7 @@ public class PizzaOrder extends javax.swing.JFrame {
         int valasz = JOptionPane.showConfirmDialog(rootPane, format, Cim, JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
         if (valasz == JOptionPane.YES_OPTION) {
+           
             System.exit(0);
         }
         if (valasz == JOptionPane.NO_OPTION) {
